@@ -74,6 +74,6 @@ RUN git clone https://github.com/facebook/iTorch.git && \
 ##############################################################################
 RUN mkdir /notebook
 VOLUME ["/notebook"]
-
-ENTRYPOINT itorch notebook --no-browser --ip="0.0.0.0" --port=8888 --notebook-dir="/notebook"
 WORKDIR /notebook
+
+CMD itorch notebook --no-browser --ip="0.0.0.0" --port=8888 --notebook-dir="/notebook"

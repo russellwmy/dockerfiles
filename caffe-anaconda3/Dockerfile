@@ -89,6 +89,11 @@ ENV PYTHONPATH /opt/caffe/python
 
 EXPOSE 8888
 
-WORKDIR /opt/workspace
+##############################################################################
+# settings
+##############################################################################
+RUN mkdir /notebook
+VOLUME ["/notebook"]
+WORKDIR /notebook
 
-CMD jupyter notebook --no-browser --ip="*"
+CMD jupyter notebook --no-browser --ip="0.0.0.0" --port=8888 --notebook-dir="/notebook"

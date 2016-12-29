@@ -46,6 +46,6 @@ EXPOSE 8888
 ##############################################################################
 RUN mkdir /notebook
 VOLUME ["/notebook"]
-
-ENTRYPOINT jupyter notebook --no-browser --ip="0.0.0.0" --port=8888 --notebook-dir="/notebook"
 WORKDIR /notebook
+
+CMD jupyter notebook --no-browser --ip="0.0.0.0" --port=8888 --notebook-dir="/notebook"
