@@ -1,28 +1,26 @@
-FROM ubuntu:latest
+FROM buildpack-deps:jessie-scm
+
 MAINTAINER Russell Wong <russellwmy@gmail.com>
 
-# locale
-RUN cp /usr/share/zoneinfo/Asia/Hong_Kong /etc/localtime
-RUN locale-gen en_US.UTF-8
-ENV LANG en_US.UTF-8
-ENV LANGUAGE en_US:en
-ENV LC_ALL en_US.UTF-8
+##############################################################################
+# OS Setup
+##############################################################################
+# Setup Unicode
+RUN apt-get update && apt-get install -y --no-install-recommends\
+    locales \
+    && rm -rf /var/lib/apt/lists/* \
+    && localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
+
+ENV LANG en_US.utf8
 
 # Install Anaconda dependencies
-RUN apt-get update && apt-get install -y \
-    wget \
+RUN apt-get update && apt-get install -y --no-install-recommends\
     bzip2 \
-    ca-certificates \
     libglib2.0-0 \
     libxext6 \
     libsm6 \
     libxrender1 \
-    git \
-    mercurial \
-    subversion \
-    && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/*
 
 ##############################################################################
 # anaconda python

@@ -1,26 +1,36 @@
-FROM ubuntu:latest
+FROM buildpack-deps:jessie-scm
 
-MAINTAINER Russell Wong "russellwmy@gmail.com"
+MAINTAINER Russell Wong <russellwmy@gmail.com>
 
-ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
+##############################################################################
+# OS Setup
+##############################################################################
+# Setup Unicode
+RUN apt-get update && apt-get install -y --no-install-recommends\
+    locales \
+    && rm -rf /var/lib/apt/lists/* \
+    && localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
 
+ENV LANG en_US.utf8
 
-# install apt packages
-RUN apt-get update --fix-missing &&  apt-get install -y \
-    curl \
-    grep \
-    sed \
-    dpkg \
-    wget \
+# Install Anaconda dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends\
     bzip2 \
-    ca-certificates \
     libglib2.0-0 \
     libxext6 \
     libsm6 \
     libxrender1 \
-    git \
-    mercurial \
-    subversion \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install caffe dependencies
+RUN apt-get update --fix-missing &&  apt-get install -y --no-install-recommends\
+    grep \
+    sed \
+    dpkg \
+    libglib2.0-0 \
+    libxext6 \
+    libsm6 \
+    libxrender1 \
     build-essential \
     libatlas-base-dev \
     libboost-all-dev \
