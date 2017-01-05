@@ -1,5 +1,8 @@
 FROM buildpack-deps:jessie-scm
 
+##############################################################################
+# OS Setup
+##############################################################################
 # gcc for cgo
 RUN apt-get update && apt-get install -y --no-install-recommends \
     g++ \
@@ -9,6 +12,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     pkg-config \
   && rm -rf /var/lib/apt/lists/*
 
+##############################################################################
+# Go Lang Setup
+##############################################################################
 ENV GOLANG_VERSION 1.7.4
 ENV GOLANG_DOWNLOAD_URL https://golang.org/dl/go$GOLANG_VERSION.linux-amd64.tar.gz
 ENV GOLANG_DOWNLOAD_SHA256 47fda42e46b4c3ec93fa5d4d4cc6a748aa3f9411a2a2b7e08e3a6d80d753ec8b
