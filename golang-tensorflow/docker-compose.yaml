@@ -1,0 +1,12 @@
+version: '2'
+services:
+  cmd:
+    build: "."
+    container_name: russellwmy/go-tensorflow
+    volumes:
+      - ./:/opt/go/src/github.com/russellwmy/go-tensorflow
+    environment:
+      DEBUG: 'true'
+    stdin_open: true
+    tty: true
+    command: bash
