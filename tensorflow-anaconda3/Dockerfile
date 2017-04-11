@@ -42,7 +42,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 # anaconda python
 ##############################################################################
 # Install Anaconda
-ENV CONDA_DOWNLOAD_SCRIPT Anaconda3-4.2.0-Linux-x86_64.sh
+ENV CONDA_DOWNLOAD_SCRIPT Anaconda3-4.3.1-Linux-x86_64.sh
 ENV CONDA_DIR /opt/conda
 
 RUN wget -q https://repo.continuum.io/archive/$CONDA_DOWNLOAD_SCRIPT && \
@@ -58,7 +58,7 @@ EXPOSE 8888
 ##############################################################################
 # tensorflow
 ##############################################################################
-ENV TF_BINARY_URL=https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.12.0-cp35-cp35m-linux_x86_64.whl
+ENV TF_BINARY_URL=https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-1.0.1-cp36-cp36m-linux_x86_64.whl
 RUN pip install --upgrade -I setuptools
 RUN pip install --upgrade $TF_BINARY_URL
 
@@ -67,8 +67,8 @@ EXPOSE 6006
 ##############################################################################
 # settings
 ##############################################################################
-RUN mkdir /notebook
-VOLUME ["/notebook"]
-WORKDIR /notebook
+RUN mkdir /notebooks
+VOLUME ["/notebooks"]
+WORKDIR /notebooks
 
-CMD jupyter notebook --no-browser --ip="0.0.0.0" --port=8888 --notebook-dir="/notebook"
+CMD jupyter notebook --no-browser --ip="0.0.0.0" --port=8888 --notebook-dir="/notebooks"
